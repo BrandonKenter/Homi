@@ -32,7 +32,7 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<title>HOMI</title>
+<title>Insert title here</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -259,7 +259,7 @@ p {
 <div id="bgimg">
 <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<%=request.getContextPath()%>/front-end/index.jsp"><h2 class="text-white headfont">HöMI</h2></a>
+            <a class="navbar-brand" href="<%=request.getContextPath()%>/front-end/index.jsp"><h2 class="text-white headfont">Hï¿½MI</h2></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mob-navbar" aria-label="Toggle">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -385,7 +385,7 @@ p {
     <div class="container">
     	<div class="row" >
     		<div class="col-md-12">
-    			<h1 class="text-white titlefont">Welcome to HöMI</h1>
+    			<h1 class="text-white titlefont">Welcome to Hï¿½MI</h1>
     			<p class="text-white parafont">A good place to find your perfect apartment</p>
     			<div class="searchdiv" style="display:none;">
     				<form method="post">
