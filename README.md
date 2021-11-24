@@ -78,6 +78,16 @@ export PATH=/usr/local/mysql-8.0.19-macos10.15-x86_64/bin:$PATH
 
 ![image](https://user-images.githubusercontent.com/91846668/136495072-74191733-237f-46ae-8a96-1138f1d8d4ea.png)
 
+* Follow the steps below to modify config. of the max uploaded capacity before run the script to prevent importing failure.
+* you also can refer this page: https://blog.chapagain.com.np/solved-error-2006-hy000-mysql-server-has-gone-away/?fbclid=IwAR2yHlkJQqaNcj73pjiFdfYuFF3Rnc2oqrTzlCS22_08Ocw_DFzNBhZKkJ0
+ 
+![image](https://user-images.githubusercontent.com/91846668/143295067-f8341d6e-f0c4-4985-9b20-cdd8c4d214cc.png)
+
+![image](https://user-images.githubusercontent.com/91846668/143295077-8797797a-f4d2-4858-932c-94c41468f5b4.png)
+
+![image](https://user-images.githubusercontent.com/91846668/143295083-cdc872f5-dced-40a3-800b-8e414e460fd2.png)
+
+
 2.Eclipse & tomcat setup
 	
 2.1 install Eclipse EE (Download Eclipse: http://tiny.cc/ug1kuz)
@@ -163,6 +173,8 @@ The functions we have now can be summarized in four main features:
 - Read pbulic cases
 
 - Rating system
+
+- My community
 
 And two additional features:
 
@@ -294,12 +306,40 @@ Users can interact with the case tiles in two way:
 
 ![image](https://user-images.githubusercontent.com/91846668/142686857-81703590-182f-46ca-98d1-24913414af13.png)
 
+**6. My community**
+
+with this function tenants can chat with the other tenants live in the same building.
+
+**6.1 View My community page**
+
+- Go to My community tab
+
+- All the user in this building would be shown on your neighbors panel
+
+- Green light represents the status of tenants (green for on-line, grey for off-line)
+
+![image](https://user-images.githubusercontent.com/91846668/143294090-bf2791f8-57b3-47b0-8a46-89030014be37.png)
+
+![image](https://user-images.githubusercontent.com/91846668/143294099-c194eac7-8834-410b-9259-f89a61578c25.png)
+
+**6.2 Chat with your neighbors**
+
+- You can chat with the tenant after clicking the name
+
+![image](https://user-images.githubusercontent.com/91846668/143294132-a557f536-da48-4774-acb5-da28e0939b04.png)
+
+*you can use existing members who have already been in same building to do the test
+
+Account: mem1@wisc.edu Password: 1111
+
+Account: mem2@wisc.edu Password: 1111
+
 
 **[Additional features]**
 
-**6. Apartment management function (for landlord)**
+**7. Apartment management function (for landlord)**
 
-**6.1 Sign up as landlord**
+**7.1 Sign up as landlord**
 
 - Select “landlord” when signing up (as below).
 
@@ -307,7 +347,7 @@ Users can interact with the case tiles in two way:
 
  ![image](https://user-images.githubusercontent.com/91846668/140576579-08a56ad8-7858-4c09-a21d-a622959e66f5.png)
  
-**6.2 Add apartment**
+**7.2 Add apartment**
 
 - Go to “My Property” tab.
 
@@ -317,7 +357,7 @@ Users can interact with the case tiles in two way:
 
  ![image](https://user-images.githubusercontent.com/91846668/140576597-091f7bae-4941-419b-9d45-18bb92adb954.png)
  	
-**6.3 Response complain cases**
+**7.3 Response complain cases**
 
 - Go to “My Property” tab.
 
@@ -328,9 +368,9 @@ Users can interact with the case tiles in two way:
  ![image](https://user-images.githubusercontent.com/91846668/140576625-9004e379-a7f0-45f5-8129-7c8c029ae4cb.png)
 
  
-**7. Payment function**
+**8. Payment function**
 
-**7.1 Add credit card**
+**8.1 Add credit card**
 
 - Go to “Member Center” tab
 
@@ -340,7 +380,7 @@ Users can interact with the case tiles in two way:
 
   ![image](https://user-images.githubusercontent.com/91846668/140576644-7513423f-be9d-41b7-af37-d37073446f0c.png)
  
-**7.2 View balance**
+**8.2 View balance**
 
 - Go to “My rent” tab
 
@@ -348,7 +388,7 @@ Users can interact with the case tiles in two way:
 
   ![image](https://user-images.githubusercontent.com/91846668/140576661-e024f1c8-d50b-41e9-bcb7-ddf6bc6bacb9.png)
  
-**7.3 Pay rental fee**
+**8.3 Pay rental fee**
 
 - Go to “My rent” tab
 
@@ -359,7 +399,7 @@ Users can interact with the case tiles in two way:
   ![image](https://user-images.githubusercontent.com/91846668/140576684-7b27649f-1a33-4e90-a8e7-0c40c45a2f9f.png)
 
 	 
-**7.4 Add fee (for landlord)**
+**8.4 Add fee (for landlord)**
 
 - Go to “Payment System” tab
 
