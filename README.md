@@ -389,6 +389,18 @@ Users can interact with the case tiles in two way:
 	- MacOS: No need to Download again. 
 
 
+**Note**
+- In order to open this project in Safari browser, pleas make sure you turn-on the develop mode in your Safari browser. Otherwise, you won't be able to open our prject by using Safari. 
+
+- How to "Turn On Develope Mode"
+	- Open Safari Browser
+	- Open Preference
+	- Click "Advanced"
+	- Check the "Show Develop on the Menu Bar"
+	- Click Develop, and Check "Allow Remote Automation"
+
+
+
 
 
 
