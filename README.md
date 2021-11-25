@@ -12,7 +12,7 @@ Our full stack is as below, so we have to install & setup the related applicatio
 
 ## Set up instruction
 
-1.MySQL setup
+**1.MySQL setup**
 
 1.1	install MySQL 8.0.19 (Download MySQL: http://tiny.cc/6f4kuz)
 
@@ -78,7 +78,7 @@ export PATH=/usr/local/mysql-8.0.19-macos10.15-x86_64/bin:$PATH
 
 ![image](https://user-images.githubusercontent.com/91846668/136495072-74191733-237f-46ae-8a96-1138f1d8d4ea.png)
 
-2.Eclipse & tomcat setup
+**2.Eclipse & tomcat setup**
 	
 2.1 install Eclipse EE (Download Eclipse: http://tiny.cc/ug1kuz)
 
@@ -145,9 +145,86 @@ In Eclipse, select Help -> Eclipse Marketplace -> Google Cloud Tools for Eclipse
 
 When opening Eclipse again, wait for Google Cloud SDK to download and configure (this may take a while)
 
-3.0 Add GCP Library to build path
+**3.Add GCP Library to build path (for archive funtion)**
 
 Right click Homii folder in Project Explorer -> Build Path -> Configure Build Path -> Libraries -> Add Library -> Google Cloud Platform Libraries -> Next -> Select "Cloud Storage" -> Finish -> Apply and Close
+
+
+**4.Redis setup (for group chat function)**
+
+**4.1 Install Redis**
+
+- Create new folder for redis installation.
+
+- Click Redis-x64.3.2.100.msi to install Redis.
+ 
+  (Download Redis from: http://tiny.cc/5fwluz)
+  
+  ![image](https://user-images.githubusercontent.com/91846668/143382510-c590f5ce-5c4d-465c-9564-078bcb0be15f.png)
+
+- Choose the folder you create before and check the Add the Redis installation to the PATH environment variable.
+
+  ![image](https://user-images.githubusercontent.com/91846668/143382519-8d08c54f-c9c9-437b-af1f-56b2b3aecc03.png)
+
+**4.2 Install Redis desktop interface**
+
+- Click Redis desktop manager to install Redis.
+
+(Download Redis desktop manager from http://tiny.cc/9fwluz)
+
+![image](https://user-images.githubusercontent.com/91846668/143382546-07a83ada-39aa-4b09-8c57-b37d1fc7d4f7.png)
+
+-  Just keep click next and you can finish installation.
+
+**4.3 Set Redis Service to manual startup**
+
+- Right click on windows icon and choose Computer Management.
+
+![image](https://user-images.githubusercontent.com/91846668/143382564-24e17ce5-a2f5-4761-b958-be12087f1bfd.png)
+
+- Select Service and application.
+
+![image](https://user-images.githubusercontent.com/91846668/143382573-1efa6ead-1ddf-4fa8-8f96-92a9882bee54.png)
+
+- Choose Services.
+
+![image](https://user-images.githubusercontent.com/91846668/143382587-c37a9432-d670-48e7-815f-94a7e4228ebc.png)
+
+- Find Redis and Stop the service.
+
+![image](https://user-images.githubusercontent.com/91846668/143382613-1fea1bde-5495-4997-985f-76b7817d545a.png)
+
+- Right click on Redis and choose Properties.
+
+![image](https://user-images.githubusercontent.com/91846668/143382642-3a96b110-c9e5-420b-a2a5-cf59fdbe315b.png)
+
+- Startup Type choose Manual, and click OK and finish.
+
+![image](https://user-images.githubusercontent.com/91846668/143382652-32959b51-3d76-4fd8-8135-c1e665b44348.png)
+
+**4.4 Redis Configuration setting**
+
+- Go to the folder you install Redis and right click on  redis.windows.conf and open with notepad
+
+![image](https://user-images.githubusercontent.com/91846668/143382752-5c27c735-0dce-4ee0-ab5b-7b8997253342.png)
+
+- Search word for 127 to find the code same as picture below, and add ”#” in front of 127.0.0.1
+
+![image](https://user-images.githubusercontent.com/91846668/143382767-e55a1df8-44fc-4e4a-850d-c801dba1e57c.png)
+
+- Search word for requirepass to find the same code as picture below and edit “# requirepass foobared” to “requirepass 123456” same as picture below after that, you can save and quit
+
+![image](https://user-images.githubusercontent.com/91846668/143382802-15018a2c-5d0d-4864-9659-1b61951254f5.png)
+
+- Search word for requirepass to find the same code as picture below and edit “# requirepass foobared” to “requirepass 123456” same as picture below after that, you can save and quit
+
+**4.5 start up Redis**
+
+- Congratulations! You can start your Redis by clicking on redis_startup, please keep Redis service open during you use the message function.
+
+(Dwonload redis start up from http://tiny.cc/ffwluz)
+
+![image](https://user-images.githubusercontent.com/91846668/143382826-7c75871b-a423-4979-ac5f-81a898abed81.png)
 
 ## Usage instruction
 
