@@ -418,11 +418,13 @@ $(document).ready(function () {
     
   //change basic
     $("#user-info-form").submit(function (e) {
+    	console.log("YY");
         e.preventDefault();
         let form = document.getElementById("user-info-form");
         let divs = $("#user-info-form").children("div");
         let inputs = divs.children("input");
         let formData = new FormData(form);
+        console.log("NN");
         $.ajax({
             url: "<%=request.getContextPath()%>/MemServlet?action=update_member",
             data: formData,
