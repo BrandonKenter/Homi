@@ -39,7 +39,7 @@ public class CompServlet extends HttpServlet{
 
 		String action = req.getParameter("action");
 		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html; charset=ISO-8859-1");
+		res.setContentType("text/html; charset=UTF-8");
 		InputStream in = null;
 
 		if ("insert".equals(action)) { // request from addEmp.jsp
@@ -169,7 +169,7 @@ public class CompServlet extends HttpServlet{
 			if (comp_pic != null && comp_pic.length != 0) {
 				res.getOutputStream().write(comp_pic);
 			} else {
-				in = req.getServletContext().getResourceAsStream("/img/no image.png");
+				in = req.getServletContext().getResourceAsStream("");
 				byte[] pic = new byte[in.available()];
 				in.read(pic);
 				res.getOutputStream().write(pic);
@@ -279,5 +279,6 @@ public class CompServlet extends HttpServlet{
 				failureView.forward(req, res);
 			}
 		}
+
 	}
 }

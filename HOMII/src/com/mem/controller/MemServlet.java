@@ -45,7 +45,6 @@ public class MemServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println("QQ");
 		String action = req.getParameter("action");
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
@@ -268,7 +267,6 @@ public class MemServlet extends HttpServlet {
 			}
 		}
 		if ("update_member".equals(action)) {
-			System.out.println("RR");
 			res.setCharacterEncoding("UTF-8");
 			res.setContentType("text; charset=utf-8");
 			PrintWriter out = res.getWriter();

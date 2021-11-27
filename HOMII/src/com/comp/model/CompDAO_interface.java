@@ -8,6 +8,7 @@ public interface CompDAO_interface {
 	public List<CompVO> getAllByLandName(String landlord_name);
 	public CompVO findByPrimaryKey(Integer complaint_no);
 	public CompVO getOnePic(Integer complaint_no);
+	public CompVO getOneVid(Integer complaint_no);
 	public void updateRes(CompVO compVO);
 	public List<CompVO> getAllByMemNo(Integer member_no);	
 	public List<CompVO> getAllDesc();

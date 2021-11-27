@@ -47,6 +47,9 @@ private CompDAO_interface dao;
 	public CompVO getOnePic(Integer complaint_no) {
 		return dao.getOnePic(complaint_no);
 	}
+	public CompVO getOneVid(Integer complaint_no) {
+		return dao.getOneVid(complaint_no);
+	}
 	public CompVO updateResponse(Integer complaint_no, String status, String response) {
 		CompVO compVO = new CompVO();
 		compVO.setComplaint_no(complaint_no);

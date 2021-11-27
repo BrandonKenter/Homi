@@ -187,10 +187,6 @@ textarea.form-control {
 			  				<label for="photo">Photo</label>
 					    	<span><input id="photo" type="file" name="photo" class="input" accept="image/*"></span>
 				  		</div>
-			  			<div class="form-group">
-			  				<label for="video">Video</label>
-					    	<span><input id="video" type="file" name="video" class="input" accept="video/*"></span>
-				  		</div>
 					</div>
 					</div>
 					<div>

@@ -31,6 +31,7 @@ public class CompDAO implements CompDAO_interface{
 	private static final String GET_ALL_STMT_BY_MEMNO = "SELECT * FROM complaint where member_no = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM complaint where complaint_no = ?";
 	private static final String GET_ONE_PIC = "SELECT comp_pic FROM complaint WHERE complaint_no=?";
+	private static final String GET_ONE_VID = "SELECT comp_vid FROM complaint WHERE complaint_no=?";
 	private static final String UPDATERES = "UPDATE complaint set status=?, response=? where complaint_no = ?";
 	private static final String GET_ALL_STMT_DESC = "SELECT * FROM complaint where pubtype = 0 order by crt_dt desc;";
 	
@@ -295,6 +296,52 @@ public class CompDAO implements CompDAO_interface{
 				compVO.setComp_pic(rs.getBytes("comp_pic"));
 			}
 
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return compVO;
+	}
+	public CompVO getOneVid(Integer complaint_no) {
+		CompVO compVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_VID);
+			
+			pstmt.setInt(1, complaint_no);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				compVO = new CompVO();
+				compVO.setComp_vid(rs.getBytes("comp_vid"));
+			}
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {

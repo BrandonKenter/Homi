@@ -34,9 +34,10 @@
 <title>Show Complaint for Tenant</title>
 <style>
 body{
-  background-image: url("<%=request.getContextPath()%>/img/lampcut.jpg");
+  background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.2)), url("<%=request.getContextPath()%>/img/comp3.jpg");
   background-size:100%;
-    background-attachment:fixed;
+  background-attachment:fixed;
+  color:#f7f0f0 !important;
 }
 .content-header{
   font-family: 'Roboto', sans-serif;
@@ -157,39 +158,73 @@ textarea.form-control {
 		<br>
 		<hr style="height:2px;border-width:0;color:black;background-color:black">
 		<div class="row">
-		<h2>-- Event 1 --</h2>
-			<div class="form-group">
-		    	<label for="username">Description</label>
-		    	<span><input type="text" class="form-control" value="<%=compVO.getDescription()%>" id="username"  disabled="disabled"></span>
-			</div>
-			<div class="form-group">
-		    	<label for="username">Status</label>
-		    	<c:choose>
-                   <c:when test="${compVO.status==0}">
-						<span><input type="text" class="form-control" value="Pending" id="username" style="width:10%;" disabled="disabled"></span>
-                   </c:when>
-                   <c:when test="${compVO.status==1}">
-                         <span><input type="text" class="form-control" value="Processing" id="username" style="width:10%;"  disabled="disabled"></span>
-                   </c:when>
-                   <c:when test="${compVO.status==2}">
-                         <span><input type="text" class="form-control" value="Solved" id="username" style="width:10%;"  disabled="disabled"></span>
-                   </c:when>
-                   <c:otherwise>
-                   		 <span><input type="text" class="form-control" value="Invalid Status" id="username"  disabled="disabled"></span>
-                   </c:otherwise>
-	            </c:choose>  
-		    	
-			</div>
-			<div class="form-group">
-		    	<label for="username">LandLord's response</label>
-		    	<span><input type="text" class="form-control" value="<%=compVO.getResponse()%>" id="username"  disabled="disabled"></span>
-			</div>			
-		</div>   
+			<h2>${compVO.case_title}</h2>
+			<div class="col-md-6">
+				<div class="form-group">
+			    	<label for="username">Description</label>
+			    	<span><textarea class="form-control" id="description" disabled>${compVO.description}</textarea></span>
+				</div>
+				<div class="form-group">
+			    	<label for="username">Status</label>
+			    	<span>
+			    		<input type="radio" id="pending" name="status" class="compStatus" value="0" <%=(!compVO.getStatus().equals("0"))? "":"checked"%>>Pending&nbsp;
+			    		<input type="radio" id="processing" name="status" class="compStatus" value="1" <%=(!compVO.getStatus().equals("1"))? "":"checked"%>>Processing&nbsp;
+			    		<input type="radio" id="solved" name="status" class="compStatus" value="2" <%=(!compVO.getStatus().equals("2"))? "":"checked"%>>Solved&nbsp;
+			    	</span>
+				</div>
+					<p id="mem_name" style="display:none;">${memSvc.getOneMem(memVO.member_no).mb_name}</p>
+			    	<p id="land_name" style="display:none;">${compVO.land_name}</p>
+				<div class="form-group">
+			    	<label for="username">LandLord's response</label>
+			    	<span><textarea class="form-control" id="response">${compVO.response}</textarea></span>
+				</div>	
+			</div>		
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="username">Photo</label>
+					<span><img class="d-block w-100" src="${pageContext.request.contextPath}/comp/comp.do?action=view_comPic&complaint_no=${compVO.complaint_no}" alt=""></span>
+				</div>
+			</div>  
+		</div>
+ 
 	</div> 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+$(".compStatus").click(function(e){
+	let mb_name = $("#mem_name").text();
+	let land_name = $("#land_name").text();
+
+	if (mb_name != land_name){
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Only Landlord can edit",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    	e.preventDefault();
+	}
+})
+$("#response").click(function(e){
+	let mb_name = $("#mem_name").text();
+	let land_name = $("#land_name").text();
+
+	if (mb_name != land_name){
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Only Landlord can edit",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    	e.preventDefault();
+	}
+})
+</script>
 
     
 </body>

@@ -191,10 +191,6 @@ img {
 			  				<label for="photo">Photo</label>
 					    	<span><img src="${pageContext.request.contextPath}/comp/comp.do?action=view_comPic&complaint_no=${compVO.complaint_no}" alt=""></span>
 				  		</div>
-			  			<div class="form-group">
-			  				<label for="video">Video</label>
-					    	<span></span>
-				  		</div>
 					</div>
 					</div>
 					<br>
