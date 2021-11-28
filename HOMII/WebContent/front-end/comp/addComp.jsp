@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.comp.model.*"%>
+<jsp:useBean id="regSvc" scope="page" class="com.reg.model.RegService" />
 <%
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	if(memVO == null){
@@ -158,15 +159,22 @@ textarea.form-control {
 			  			</div>
 			  			<div class="form-group">
 			  				<label for="apName">Apartment Name</label>
-					    	<span><input type="text" class="form-control" name="apName" value="" id="apName" placeholder=" Enter Apartment Name"></span>
+					    	<span>
+					    		<select size="1" name="apName" id="apName">
+					    			<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+									<c:forEach var="regVO" items="${regSvc.getAllRegisterByMemNo(memVO.member_no)}">
+										<option value="${regVO.ap_name}">${regVO.ap_name}
+									</c:forEach>
+								</select>
+					    	</span>
 				  		</div>
 				  		<div class="form-group">
 					    	<label for="apAddress">Apartment Address</label>
-					    	<span><input type="text" class="form-control" name="apAddress" value="" id="apAddress" placeholder=" Enter Apartment Address"></span>
+					    	<span><input type="text" class="form-control" name="apAddress"  id="apAddress" disabled></span>
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="landname">Landlord Name</label>
-					    	<span><input type="text" class="form-control" name="landName" value="" id="landname" placeholder=" Enter Landlord Name" ></span>
+					    	<span><input type="text" class="form-control" name="landName"  id="landname" disabled></span>
 			  			</div>
 			  		</div>
 			  		<div class="col-md-6">
@@ -205,7 +213,31 @@ textarea.form-control {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script>
+
+
+$("#apName").change(function(){
+	let apName = $("#apName").val();
+	let apAddress = $("#apAddress");
+	let landname = $("#landname");
+	$.ajax({
+		url: "<%=request.getContextPath()%>/comp/comp.do",
+		data: { 
+			"action": "query_for_Ajax",
+			"apName": apName
+        },
+        type: "POST",
+        success: function(json){
+        	console.log(json);
+        	let jsonobj = JSON.parse(json);
+        	let aptAddress = jsonobj.aptAddress;
+        	let landlordName = jsonobj.landlordName;
+        	apAddress.val(aptAddress);
+        	landname.val(landlordName);
+        },
+	});
+})
 
 $("#priority").change(function(){
 	var p = $("#priority").val();
@@ -218,7 +250,6 @@ $("#priority").change(function(){
 	}
 	
 })
-for (var i = 0; i < images.length; i++) { var image = images[i], width = String(image.currentStyle.width); if (width.indexOf('%') == -1) { continue; } image.origWidth = image.offsetWidth; image.origHeight = image.offsetHeight; imgCache.push(image); c.ieAlpha(image); image.style.width = width; }
 </script>
 </body>
 </html>

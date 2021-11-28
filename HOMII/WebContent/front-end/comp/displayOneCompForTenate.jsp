@@ -172,6 +172,12 @@ textarea.form-control {
 			    		<input type="radio" id="solved" name="status" class="compStatus" value="2" <%=(!compVO.getStatus().equals("2"))? "":"checked"%>>Solved&nbsp;
 			    	</span>
 				</div>
+				<div class="form-group">
+			    	<label for="username">Priority</label>
+			    	<span>
+			    	   ${compVO.priority}
+			    	</span>
+				</div>
 					<p id="mem_name" style="display:none;">${memSvc.getOneMem(memVO.member_no).mb_name}</p>
 			    	<p id="land_name" style="display:none;">${compVO.land_name}</p>
 				<div class="form-group">

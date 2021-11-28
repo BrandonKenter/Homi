@@ -2,6 +2,7 @@ package com.comp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,12 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.apt.model.AptService;
 import com.apt.model.AptVO;
 import com.comp.model.CompService;
 import com.comp.model.CompVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+
+import websocket.jedis.JedisHandleMessage;
 
 
 @WebServlet("/CompServlet")
@@ -41,6 +48,7 @@ public class CompServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 		InputStream in = null;
+		PrintWriter out = res.getWriter();
 
 		if ("insert".equals(action)) { // request from addEmp.jsp
 			List<String> errorMsgs = new LinkedList<String>();
@@ -278,6 +286,31 @@ public class CompServlet extends HttpServlet{
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/index.jsp");
 				failureView.forward(req, res);
 			}
+		}
+		
+		if("query_for_Ajax".equals(action)) {
+			String apName = req.getParameter("apName");
+			System.out.println(apName);
+			try {
+				AptService aptSvc = new AptService();
+				AptVO aptvo = aptSvc.getOneAptByApName(apName);
+				String aptAddress = aptvo.getAp_address();
+				MemService memSvc = new MemService();
+				String landlordName = memSvc.getOneMem(aptvo.getMember_no()).getMb_name();
+				JSONObject jsonobj=new JSONObject();
+				System.out.println(aptAddress);
+				jsonobj.put("aptAddress", aptAddress);
+				jsonobj.put("landlordName", landlordName);
+				out.print(jsonobj.toString());
+				return;
+			}catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				out.flush();
+				out.close();
+			}
+			
 		}
 
 	}
