@@ -16,7 +16,7 @@ private CompDAO_interface dao;
 	
 	
 	public CompVO addComp(Integer member_no, String ap_name, String ap_address, 
-			 String land_name, String case_title, String description, String pubtype, byte[] comp_pic, byte[] comp_vid, String priority) {
+			 String land_name, String case_title, String description, String pubtype, byte[] comp_pic, String priority) {
 		
 		CompVO compVO = new CompVO();
 		
@@ -28,7 +28,6 @@ private CompDAO_interface dao;
 		compVO.setDescription(description);
 		compVO.setPubtype(pubtype);
 		compVO.setComp_pic(comp_pic);
-		compVO.setComp_vid(comp_vid);
 		compVO.setPriority(priority);
 
 		dao.insert(compVO);

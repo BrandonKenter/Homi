@@ -5,10 +5,10 @@ public class jdbcUtil_CompositeQuery_Apartment {
 	public static String get_aCondition_For_myDB(String columnName, String value) {
 
 		String aCondition = null;
-		if ("ap_name".equals(columnName)) 
+		if ("member_no".equals(columnName)) 
 			aCondition = columnName + "=" + value;
-//		else if ("land_name".equals(columnName) )
-//			aCondition = getDisassembledCondition(columnName, value);
+		else if ("ap_name".equals(columnName) )
+			aCondition = getDisassembledCondition(columnName, value);
 		
 		return aCondition + " ";
 	}

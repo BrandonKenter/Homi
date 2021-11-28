@@ -182,7 +182,7 @@ textarea.form-control {
 			    	<p id="land_name" style="display:none;">${compVO.land_name}</p>
 				<div class="form-group">
 			    	<label for="username">LandLord's response</label>
-			    	<span><textarea class="form-control" id="response">${compVO.response}</textarea></span>
+			    	<span><textarea class="form-control" id="response" readonly>${compVO.response}</textarea></span>
 				</div>	
 			</div>		
 			<div class="col-md-6">

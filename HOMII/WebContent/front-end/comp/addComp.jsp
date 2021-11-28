@@ -170,11 +170,11 @@ textarea.form-control {
 				  		</div>
 				  		<div class="form-group">
 					    	<label for="apAddress">Apartment Address</label>
-					    	<span><input type="text" class="form-control" name="apAddress"  id="apAddress" disabled></span>
+					    	<span><input type="text" class="form-control" name="apAddress" id="apAddress" readonly></span>
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="landname">Landlord Name</label>
-					    	<span><input type="text" class="form-control" name="landName"  id="landname" disabled></span>
+					    	<span><input type="text" class="form-control" name="landName" id="landname" readonly ></span>
 			  			</div>
 			  		</div>
 			  		<div class="col-md-6">

@@ -26,7 +26,7 @@ public class CompDAO implements CompDAO_interface{
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO complaint (member_no, ap_name, ap_address, land_name, case_title, description, pubtype, comp_pic, comp_vid, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO complaint (member_no, ap_name, ap_address, land_name, case_title, description, pubtype, comp_pic, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM complaint where land_name = ?";
 	private static final String GET_ALL_STMT_BY_MEMNO = "SELECT * FROM complaint where member_no = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM complaint where complaint_no = ?";
@@ -52,8 +52,7 @@ public class CompDAO implements CompDAO_interface{
 			pstmt.setString(6, compVO.getDescription());
 			pstmt.setString(7, compVO.getPubtype());
 			pstmt.setBytes(8, compVO.getComp_pic());
-			pstmt.setBytes(9, compVO.getComp_vid());
-			pstmt.setString(10, compVO.getPriority());
+			pstmt.setString(9, compVO.getPriority());
 
 			pstmt.executeUpdate();
 

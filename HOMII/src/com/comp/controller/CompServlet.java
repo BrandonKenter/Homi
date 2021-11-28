@@ -120,12 +120,6 @@ public class CompServlet extends HttpServlet{
 				in.read(photo);
 				in.close();
 				
-				Part part2 = req.getPart("video");
-				in = part2.getInputStream();
-				byte[] video = new byte[in.available()];
-				in.read(video);
-				in.close();
-				
 				CompVO compVO = new CompVO();
 				compVO.setMember_no(mb_no);
 				compVO.setAp_name(apName);
@@ -135,7 +129,6 @@ public class CompServlet extends HttpServlet{
 				compVO.setDescription(description);
 				compVO.setPubtype(pubType);
 				compVO.setComp_pic(photo);
-				compVO.setComp_vid(video);
 				compVO.setPriority(priority);
 
 				if (!errorMsgs.isEmpty()) {
@@ -150,7 +143,7 @@ public class CompServlet extends HttpServlet{
 				 ***************************************/
 				CompService compSvc = new CompService();
 				
-				compVO = compSvc.addComp(mb_no, apName, apAddress, landName, caseTitle, description, pubType, photo, video, priority);
+				compVO = compSvc.addComp(mb_no, apName, apAddress, landName, caseTitle, description, pubType, photo, priority);
 
 				String url = "/front-end/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
