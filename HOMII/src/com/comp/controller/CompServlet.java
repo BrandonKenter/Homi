@@ -26,7 +26,6 @@ import com.comp.model.CompVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 
-import websocket.jedis.JedisHandleMessage;
 
 
 @WebServlet("/CompServlet")
@@ -48,7 +47,6 @@ public class CompServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 		InputStream in = null;
-		PrintWriter out = res.getWriter();
 
 		if ("insert".equals(action)) { // request from addEmp.jsp
 			List<String> errorMsgs = new LinkedList<String>();
@@ -171,10 +169,13 @@ public class CompServlet extends HttpServlet{
 				res.getOutputStream().write(comp_pic);
 			} else {
 				in = req.getServletContext().getResourceAsStream("");
-				byte[] pic = new byte[in.available()];
-				in.read(pic);
-				res.getOutputStream().write(pic);
-				in.close();
+				if(in != null) {
+					byte[] pic = new byte[in.available()];
+					in.read(pic);
+					res.getOutputStream().write(pic);
+					in.close();
+				}
+
 			}
 		}
 		
@@ -282,8 +283,8 @@ public class CompServlet extends HttpServlet{
 		}
 		
 		if("query_for_Ajax".equals(action)) {
+			PrintWriter out = res.getWriter();
 			String apName = req.getParameter("apName");
-			System.out.println(apName);
 			try {
 				AptService aptSvc = new AptService();
 				AptVO aptvo = aptSvc.getOneAptByApName(apName);
@@ -291,7 +292,6 @@ public class CompServlet extends HttpServlet{
 				MemService memSvc = new MemService();
 				String landlordName = memSvc.getOneMem(aptvo.getMember_no()).getMb_name();
 				JSONObject jsonobj=new JSONObject();
-				System.out.println(aptAddress);
 				jsonobj.put("aptAddress", aptAddress);
 				jsonobj.put("landlordName", landlordName);
 				out.print(jsonobj.toString());

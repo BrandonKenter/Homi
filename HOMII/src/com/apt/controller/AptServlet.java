@@ -2,8 +2,10 @@ package com.apt.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,10 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.apt.model.AptService;
 import com.apt.model.AptVO;
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 
 /**
  * Servlet implementation class AptServlet
@@ -233,6 +238,39 @@ public class AptServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("Cannot retrieve data:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/index.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("listApt_ByCompositeQuery".equals(action)) { 
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				// if statement below will be executed by first time run listApt_ByCompositeQuery
+				if (req.getParameter("whichPage") == null){
+					Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				} 
+				AptService aptSvc = new AptService();
+				List<AptVO> list  = aptSvc.getAll(map);
+				for(AptVO a : list) {
+					System.out.println(a.getAp_name());
+				}
+				req.setAttribute("listApt_ByCompositeQuery", list); 
+				RequestDispatcher successView = req.getRequestDispatcher("/front-end/apt/listApt_ByCompositeQuery.jsp"); 
+				successView.forward(req, res);
+				
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/index.jsp");
 				failureView.forward(req, res);
 			}
 		}

@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.comp.model.CompVO;
-import com.mem.model.MemVO;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Apartment;
 
 
 
@@ -394,6 +394,69 @@ public class AptDAO implements AptDAO_interface{
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<AptVO> getAll(Map<String, String[]> map) {
+		List<AptVO> list = new ArrayList<AptVO>();
+		AptVO aptVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {			
+			con = ds.getConnection();
+			String finalSQL = "select * from `apartment` "
+			          + jdbcUtil_CompositeQuery_Apartment.get_WhereCondition(map)
+			          + "order by ap_no";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				aptVO = new AptVO();
+				aptVO.setAp_no(rs.getInt("ap_no"));
+				aptVO.setMember_no(rs.getInt("member_no"));
+				aptVO.setAp_name(rs.getString("ap_name"));
+				aptVO.setAp_address(rs.getString("ap_address"));
+				aptVO.setAp_pic1(rs.getBytes("ap_pic1"));
+				aptVO.setAp_pic2(rs.getBytes("ap_pic2"));
+				aptVO.setAp_pic3(rs.getBytes("ap_pic3"));
+				aptVO.setRating(rs.getFloat("rating"));
+				
+				list.add(aptVO); // Store the row in the List
+			}
+			
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

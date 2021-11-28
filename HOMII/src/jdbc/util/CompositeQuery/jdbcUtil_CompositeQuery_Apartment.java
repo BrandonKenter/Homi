@@ -37,12 +37,12 @@ public class jdbcUtil_CompositeQuery_Apartment {
 
 	public static String getDisassembledCondition(String columnName, String str) {
 		String tmpStr = "(";
-		
-		for (int i = 0 ; i < str.length(); i++) {
-			tmpStr +=  columnName + " like '%" + str.charAt(i) + "%'";
-			tmpStr = ( i == (str.length()-1) )? tmpStr : tmpStr+" or ";
-			System.out.println("tmpStr = " + tmpStr);
-		}
+		tmpStr +=  columnName + " like '%" + str + "%'";
+//		for (int i = 0 ; i < str.length(); i++) {
+//			tmpStr +=  columnName + " like '%" + str.charAt(i) + "%'";
+//			tmpStr = ( i == (str.length()-1) )? tmpStr : tmpStr+" or ";
+//			System.out.println("tmpStr = " + tmpStr);
+//		}
 		tmpStr += ")";
 		return tmpStr;
 	}
@@ -54,7 +54,7 @@ public class jdbcUtil_CompositeQuery_Apartment {
 		String finalSQL = "select * from `apartment` "
 				          + jdbcUtil_CompositeQuery_Apartment.get_WhereCondition(map)
 				          + "order by ap_no";
-		System.out.println("¡´¡´finalSQL = " + finalSQL);
+		System.out.println("finalSQL = " + finalSQL);
 
 	}
 }

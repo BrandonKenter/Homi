@@ -1,9 +1,9 @@
 package com.apt.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.comp.model.CompVO;
-import com.mem.model.MemVO;
 
 public class AptService {
 	
@@ -46,5 +46,8 @@ public class AptService {
 	}
 	public List<AptVO> getAllBottom(){
 		return dao.getAllAsc();
+	}
+	public List<AptVO> getAll(Map<String, String[]> map) {		
+		return dao.getAll(map);
 	}
 }

@@ -211,17 +211,16 @@ p {
 .titlefont{
 	font-family: system-ui;
 	font-size:3rem;
-	margin-left:60px;
-	margin-top:10px;
 	position:relative;
-	top:-100px;
+	top:-60px;
+	text-align: center;
 }
 
 
 .parafont {
 	position:relative;
-	top:-50px;
-	left:100px;
+	top:-30px;
+	text-align: center;
 }
 .title1{
 	position:relative;
@@ -232,9 +231,14 @@ p {
 
 .searchdiv{
 	background-color:rgb(0,0,100,0.1);
-	padding:10px 20px;
+	padding:10px 45px;
+	border-radius: 15px;
+	position: relative;
+	top:25px;
 }
-
+.form-control {
+	width: 550px !important; 
+}
 </style>
 </head>
 <body>
@@ -246,14 +250,15 @@ p {
     			<h1 class="text-white titlefont">Welcome to HöMI</h1>
     			<p class="text-white parafont">A good place to find your perfect apartment</p>
     			<div class="searchdiv" style="display:none;">
-    				<form method="post">
-	    				<div class="row">
-	    					<div class="col-lg-8">
-	    						<input type="text" placeholder="Where are you looking for?">
-	    					</div>
-	    					<div class="col-lg-4">
-	    						<input type="submit" value="Search">
-	    					</div>
+    				<form method="post" action="<%=request.getContextPath()%>/apt/apt.do">
+	    				<div class="input-group">
+	    				  <div class="form-outline">
+	    						<input type="search" name="ap_name" value="" class="form-control" placeholder="What apartments are you looking for?" onkeydown="if (event.keyCode == 13) sendMessage();">
+	    				 	    <input type="hidden" name="action" value="listApt_ByCompositeQuery">
+	    				  </div>
+							  <button id="search-button" type="submit" class="btn btn-primary">
+							    <i class="fas fa-search"></i>
+							  </button>
 	    				</div>
     				</form>
     			</div>

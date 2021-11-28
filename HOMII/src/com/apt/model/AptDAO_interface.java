@@ -1,6 +1,8 @@
 package com.apt.model;
 
 import java.util.List;
+import java.util.Map;
+
 
 public interface AptDAO_interface {
 	public AptVO findByPrimaryKey(Integer apt_no);
@@ -10,4 +12,5 @@ public interface AptDAO_interface {
 	public List<AptVO> getAllByMemNo(Integer member_no);
 	public List<AptVO> getAllDesc();
 	public List<AptVO> getAllAsc();
+	public List<AptVO> getAll(Map<String, String[]> map);
 }
