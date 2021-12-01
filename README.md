@@ -226,6 +226,10 @@ Right click Homii folder in Project Explorer -> Build Path -> Configure Build Pa
 
 ![image](https://user-images.githubusercontent.com/91846668/143382826-7c75871b-a423-4979-ac5f-81a898abed81.png)
 
+
+**5.Install and Run Redis in MacOS**
+- Link: https://gist.github.com/tomysmile/1b8a321e7c58499ef9f9441b2faa0aa8
+
 ## Usage instruction
 
 
