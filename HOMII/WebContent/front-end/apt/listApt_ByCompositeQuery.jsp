@@ -214,6 +214,16 @@ textarea.form-control {
 .form-control {
 	width: 300px !important; 
 }
+#nothingSearch{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 </style>
 </head>
 <body>
@@ -231,33 +241,41 @@ textarea.form-control {
 		</div>
 	</form>
 </div>
-<table id="forum" class="table table-hover">
-	 <thead style="background-color:#126E7D">
-		<tr>		
-			<th>Photo</th>
-			<th>Apartment Name</th>
-			<th>Apartment Address</th>
-			<th>Landlord Name</th>			
-			<th>Rating</th>
-		</tr>
-	</thead>
-	<c:forEach var="aptVO" items="${listApt_ByCompositeQuery}">		
-		<tbody>
-			<tr>
-				<td>
-					<img src="${pageContext.request.contextPath}/apt/apt.do?action=view_aptPic1&ap_name=${aptVO.ap_name}"
-								alt="No pic" width="96px;" height="108px" title=""/>
-				</td>
-				<td style=" font-size:large;">
-					<a class="notJQellipsis" href="<%=request.getContextPath()%>/apt/apt.do?action=getOne_For_Display&ap_no=${aptVO.ap_no}">${aptVO.ap_name}</a>
-				</td>		
-	            <td>${aptVO.ap_address}</td>
-	            <td>${memSvc.getOneMem(aptVO.member_no).mb_name}</td>
-				<td>${aptVO.rating}</td>
-
-			</tr>
-		</tbody>			
-	</c:forEach>
-</table>
+<c:choose>
+	<c:when test = "${listApt_ByCompositeQuery.size() == 0}">
+		<div id="nothingSearch">
+			<h3>Sorry, nothing is found. Please find again or contact with our staff.</h3>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<table id="forum" class="table table-hover">
+			 <thead style="background-color:#126E7D">
+				<tr>		
+					<th>Photo</th>
+					<th>Apartment Name</th>
+					<th>Apartment Address</th>
+					<th>Landlord Name</th>			
+					<th>Rating</th>
+				</tr>
+			</thead>
+				<c:forEach var="aptVO" items="${listApt_ByCompositeQuery}">		
+					<tbody>
+						<tr>
+							<td>
+								<img src="${pageContext.request.contextPath}/apt/apt.do?action=view_aptPic1&ap_name=${aptVO.ap_name}"
+											alt="No pic" width="96px;" height="108px" title=""/>
+							</td>
+							<td style=" font-size:large;">
+								<a class="notJQellipsis" href="<%=request.getContextPath()%>/apt/apt.do?action=getOne_For_Display&ap_no=${aptVO.ap_no}">${aptVO.ap_name}</a>
+							</td>		
+				            <td>${aptVO.ap_address}</td>
+				            <td>${memSvc.getOneMem(aptVO.member_no).mb_name}</td>
+							<td>${aptVO.rating}</td>
+						</tr>
+					</tbody>			
+				</c:forEach>
+		</table>
+	</c:otherwise>
+</c:choose>
 </body>
 </html>
