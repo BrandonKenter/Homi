@@ -31,8 +31,8 @@ public class RateDAO implements RateDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO rating (member_no, ap_no, rate_handletime, rate_clean, rate_service, rate_price, rate_location, comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM rating where rate_no = ?";
-	private static final String GET_ALL_STMT_BY_APTNO = "SELECT * FROM rating where apt_no = ?";
-	private static final String GET_ONE_STMT = "SELECT * FROM rating where rating_no = ?";
+	private static final String GET_ALL_STMT_BY_APTNO = "SELECT * FROM rating where ap_no = ?";
+	private static final String GET_ONE_STMT = "SELECT * FROM rating where rate_no = ?";
 
 	@Override
 	public void insert(RateVO rateVO) {
