@@ -82,7 +82,7 @@ nav{
                     <li class="nav-item">
                     	<c:choose>
 	                         <c:when test="${memVO==null || memVO.member_no==99 }">
-	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">My rent</a></li>
+	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">My Rent</a></li>
 	                         </c:when>
 	                         <c:otherwise>
 	                         	<c:choose>
@@ -101,7 +101,7 @@ nav{
                     <li class="nav-item">
                     	<c:choose>
 	                         <c:when test="${memVO==null || memVO.member_no==99 }">
-	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">My community</a></li>
+	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">My Community</a></li>
 	                         </c:when>
 	                         <c:otherwise>
 	                         	<c:choose>
@@ -120,27 +120,6 @@ nav{
 	                         <c:otherwise>
 	                         </c:otherwise>
 	                    </c:choose>    	
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <c:choose>
-                         <c:when test="${memVO==null || memVO.member_no==99 }">
-                         	<li><a class="dropdown-item" href="#" onclick="loginFirst()" >Service1</a></li>
-                         	<li><a class="dropdown-item" href="#" onclick="loginFirst()" >Service2</a></li>
-                         	<li><a class="dropdown-item" href="#" onclick="loginFirst()" >Service3</a></li>
-                         	<li><hr class="dropdown-divider" /></li>
-                         	<li><a class="dropdown-item" href="#" onclick="loginFirst()" >Service4</a></li>
-                         </c:when>
-                         <c:otherwise>
-                         	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/front-end/xxx">Service1</a></li>
-                         	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/front-end/xxx">Service2</a></li>
-                         	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/front-end/xxx">Service3</a></li>
-                         	<li><hr class="dropdown-divider" /></li>
-                         	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/front-end/xxx">Service4</a></li>
-                         </c:otherwise>
-                        </c:choose>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
