@@ -5,6 +5,8 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.comp.model.*"%>
 <%@ page import="com.reg.model.*"%>
+<%@ page import="com.apt.model.*"%>
+<jsp:useBean id="aptSvc" scope="page" class="com.apt.model.AptService" />
 <%
 	RegVO regVO = (RegVO) request.getAttribute("regVO");
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
@@ -160,15 +162,22 @@ textarea.form-control {
 			  			</div>
 			  			<div class="form-group">
 			  				<label for="apName">Apartment Name</label>
-					    	<span><input type="text" class="form-control" name="apName" value="" id="apName" placeholder=" Enter Apartment Name"></span>
+			  				<span>
+					    		<select size="1" name="apName" id="apName">
+					    			<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+									<c:forEach var="aptVO" items="${aptSvc.getAllBottom()}">
+										<option value="${aptVO.ap_name}">${aptVO.ap_name}
+									</c:forEach>
+								</select>
+					    	</span>
 				  		</div>
 				  		<div class="form-group">
 					    	<label for="apAddress">Apartment Address</label>
-					    	<span><input type="text" class="form-control" name="apAddress" value="" id="apAddress" placeholder=" Enter Apartment Address"></span>
+					    	<span><input type="text" class="form-control" name="apAddress" id="apAddress" readonly></span>
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="landname">Landlord Name</label>
-					    	<span><input type="text" class="form-control" name="landName" value="" id="landname" placeholder=" Enter Landlord Name" ></span>
+					    	<span><input type="text" class="form-control" name="landName" id="landname" readonly ></span>
 			  			</div>
 			  		</div>
 			  		<div class="col-md-6">
@@ -245,6 +254,27 @@ try {
 }
 </style>
 <script>
+$("#apName").change(function(){
+	let apName = $("#apName").val();
+	let apAddress = $("#apAddress");
+	let landname = $("#landname");
+	$.ajax({
+		url: "<%=request.getContextPath()%>/comp/comp.do",
+		data: { 
+			"action": "query_for_Ajax",
+			"apName": apName
+        },
+        type: "POST",
+        success: function(json){
+        	console.log(json);
+        	let jsonobj = JSON.parse(json);
+        	let aptAddress = jsonobj.aptAddress;
+        	let landlordName = jsonobj.landlordName;
+        	apAddress.val(aptAddress);
+        	landname.val(landlordName);
+        },
+	});
+})
 $.datetimepicker.setLocale('en');
 $('#f_date1').datetimepicker({
    theme: '',              //theme: 'dark',
