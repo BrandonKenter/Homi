@@ -87,12 +87,12 @@ nav{
 	                         <c:otherwise>
 	                         	<c:choose>
 	                         		<c:when test="${memVO.membership == 0}">
-	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comp/listAllCompForTenant.jsp">My rent</a></li>
+	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comp/listAllCompForTenant.jsp">My Rent</a></li>
 	                         		</c:when>
 	                         	</c:choose>
 	                         	<c:choose>
 	                         		<c:when test="${memVO.membership == 1}">
-	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comp/listAllCompForLand.jsp">My property</a></li>
+	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comp/listAllCompForLand.jsp">My Property</a></li>
 	                         		</c:when>
 	                         	</c:choose>
 	                         </c:otherwise>
@@ -106,7 +106,7 @@ nav{
 	                         <c:otherwise>
 	                         	<c:choose>
 	                         		<c:when test="${memVO.membership == 0}">
-	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comu/listComu.jsp">My community</a></li>
+	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comu/listComu.jsp">My Community</a></li>
 	                         		</c:when>
 	                         	</c:choose>
 	                         </c:otherwise>
