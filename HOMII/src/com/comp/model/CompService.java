@@ -60,5 +60,8 @@ private CompDAO_interface dao;
 	public List<CompVO> getAllLatestCase(){
 		return dao.getAllDesc();
 	}
+	public List<CompVO> getAllCompByAptName(String apt_name){
+		return dao.getAllByAptName(apt_name);
+	}
 }
 

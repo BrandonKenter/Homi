@@ -12,5 +12,6 @@ public interface CompDAO_interface {
 	public void updateRes(CompVO compVO);
 	public List<CompVO> getAllByMemNo(Integer member_no);	
 	public List<CompVO> getAllDesc();
+	public List<CompVO> getAllByAptName(String apt_name);
 }
 

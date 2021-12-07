@@ -343,7 +343,7 @@ textarea.form-control {
 			<th>Date</th>
 		</tr>
 	</thead>
-	<c:forEach var="compVO" items="${compSvc.getAllCompByMemNo(memVO.member_no)}">		
+	<c:forEach var="compVO" items="${compSvc.getAllCompByAptName(aptVO.ap_name)}">		
 		<tbody>
 			<tr>
 				<td>${memSvc.getOneMem(compVO.member_no).mb_name}</td>

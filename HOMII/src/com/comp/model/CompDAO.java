@@ -34,6 +34,7 @@ public class CompDAO implements CompDAO_interface{
 	private static final String GET_ONE_VID = "SELECT comp_vid FROM complaint WHERE complaint_no=?";
 	private static final String UPDATERES = "UPDATE complaint set status=?, response=? where complaint_no = ?";
 	private static final String GET_ALL_STMT_DESC = "SELECT * FROM complaint where pubtype = 0 order by crt_dt desc;";
+	private static final String GET_ALL_STMT_BY_APTNAME = "SELECT * FROM complaint where pubtype = 0 and ap_name = ?;";
 	
 	public void insert(CompVO compVO) {
 		Connection con = null;
@@ -475,4 +476,69 @@ public class CompDAO implements CompDAO_interface{
 		return list;
 	}
 
+	@Override
+	public List<CompVO> getAllByAptName(String apt_name) {
+		List<CompVO> list = new ArrayList<CompVO>();
+		CompVO compVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_BY_APTNAME);
+			pstmt.setString(1, apt_name);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				compVO = new CompVO();
+				compVO.setComplaint_no(rs.getInt("complaint_no"));
+				compVO.setMember_no(rs.getInt("member_no"));
+				compVO.setAp_name(rs.getString("ap_name"));
+				compVO.setAp_address(rs.getString("ap_address"));
+				compVO.setLand_name(rs.getString("land_name"));
+				compVO.setCase_title(rs.getString("case_title"));
+				compVO.setDescription(rs.getString("description"));
+				compVO.setPubtype(rs.getString("pubtype"));
+				compVO.setComp_pic(rs.getBytes("comp_pic"));
+				compVO.setComp_vid(rs.getBytes("comp_vid"));
+				compVO.setCrt_dt(rs.getDate("crt_dt"));
+				compVO.setStatus(rs.getString("status"));
+				compVO.setResponse(rs.getString("response"));
+				compVO.setPriority(rs.getString("priority"));
+				
+				list.add(compVO); // Store the row in the list
+			}
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 }

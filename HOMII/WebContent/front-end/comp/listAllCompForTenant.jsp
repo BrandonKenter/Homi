@@ -254,7 +254,7 @@ textarea.form-control {
 			<h1>My Rent</h1>
 			<div class="form-group">
 		    	<label for="apName">Apartment Name</label>
-		    	<span><input type="text" class="form-control" value="<%= (regVO==null)? "" : regVO.getAp_name()%>" id="apName"  disabled="disabled"></span>
+		    	<span><input type="text" class="form-control checkReg" value="<%= (regVO==null)? "" : regVO.getAp_name()%>" id="apName"  disabled="disabled"></span>
 		  	</div>
 			<div class="form-group">
 		    	<label for="apAddress">Apartment Address</label>
@@ -281,7 +281,7 @@ textarea.form-control {
                    </c:otherwise>
 	            </c:choose>  
 		  	</div>
-		  	<a href="<%=request.getContextPath()%>/front-end/reg/addReg.jsp"><input type="button" class="btn btn-primary submit" value="Register new rent"></a>
+		  	<a href="<%=request.getContextPath()%>/front-end/reg/addReg.jsp"><input type="button" class="btn btn-primary submit checkRegBtn" value="Register new rent"></a>
 		</section>
 	</div>
 <div style="text-align:center;"><h1 class="shadow p-3 mb-1 rounded" style="display:inline-block;">All the cases</h1></div>
@@ -358,6 +358,20 @@ function loginFirst(){
 	});
 }
 
+$(".checkRegBtn").click(function(e){
+	let checkReg = $(".checkReg").val();
+	if (checkReg != null){
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Only can apply for one Apartment",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    	e.preventDefault();
+	}
+
+})
 
 </script>
 </html>
