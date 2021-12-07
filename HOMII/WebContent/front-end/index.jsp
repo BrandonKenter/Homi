@@ -239,6 +239,15 @@ p {
 .form-control {
 	width: 550px !important; 
 }
+.titleBox{
+	display: inline-block;
+    width: 100%;
+}
+.more{
+    margin-right: 140px;
+    position: relative;
+    left: 1150px;
+}
 </style>
 </head>
 <body>
@@ -266,7 +275,10 @@ p {
     	</div>
     </div>	
 </div>
-<h2 class="title1">Top Apartments</h2>
+<div class="titileBox">
+	<h2 class="title1">Top Apartments</h2>	
+	<a class="more" href="<%=request.getContextPath()%>/front-end/apt/listAllApt.jsp?pattern=desc">More apartments</a>
+</div>
 <div class="container">
     <div class="d-lg-flex">
     <c:forEach var="aptVO" items="${topApt}" begin="0" end="3">
@@ -289,7 +301,10 @@ p {
    </c:forEach>
     </div>
 </div>
-<h2 class="title1">Worst Apartments</h2>
+<div class="titileBox">
+	<h2 class="title1">Worst Apartments</h2>
+	<a class ="more" href="<%=request.getContextPath()%>/front-end/apt/listAllApt.jsp?pattern=asc">More apartments</a>
+</div>
 <div class="container">
     <div class="d-lg-flex">
     <c:forEach var="aptVO" items="${bottomApt}" begin="0" end="3">
@@ -314,7 +329,10 @@ p {
    </c:forEach>
     </div>
 </div>
-<h2 class="title1">Latest Cases</h2>
+<div class="titileBox">
+	<h2 class="title1">Latest Cases</h2>
+	<a class ="more" href="<%=request.getContextPath()%>/front-end/comp/listAllComp.jsp">More complaint cases</a>
+</div>
 <div class="container">
     <div class="d-lg-flex">
         <c:forEach var="compVO" items="${latestCase}" begin="0" end="3">
@@ -361,9 +379,6 @@ p {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-for (var i = 0; i < images.length; i++) { var image = images[i], width = String(image.currentStyle.width); if (width.indexOf('%') == -1) { continue; } image.origWidth = image.offsetWidth; image.origHeight = image.offsetHeight; imgCache.push(image); c.ieAlpha(image); image.style.width = width; }
-</script>
 <script>
 function loginFirst(){
 	Swal.fire('Please Login').then((result)=>{
