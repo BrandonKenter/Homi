@@ -360,11 +360,11 @@ function loginFirst(){
 
 $(".checkRegBtn").click(function(e){
 	let checkReg = $(".checkReg").val();
-	if (checkReg != null){
+	if (checkReg != ""){
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Only can apply for one Apartment",
+            title: "Only can apply for one apartment",
             showConfirmButton: false,
             timer: 1500,
         });
