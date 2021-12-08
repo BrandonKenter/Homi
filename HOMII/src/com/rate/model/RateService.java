@@ -40,6 +40,9 @@ public class RateService {
 	public RateVO getOneRate(Integer rate_no) {
 		return dao.findByPrimaryKey(rate_no);
 	}
+	public RateVO getOneAvgRate(Integer ap_no) {
+		return dao.findRatingByPrimaryKey(ap_no);
+	}
 
 
 }

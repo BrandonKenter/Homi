@@ -33,6 +33,29 @@ public class RateDAO implements RateDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT * FROM rating where rate_no = ?";
 	private static final String GET_ALL_STMT_BY_APTNO = "SELECT * FROM rating where ap_no = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM rating where rate_no = ?";
+	private static final String GET_ONE_AVG_STMT = 
+			"select a.*, rate_cnt, rate_handletime,rate_clean,rate_service,\r\n" + 
+			"rate_price,rate_location,rate.avg_rating\r\n" + 
+			"\r\n" + 
+			" from apartment a,\r\n" + 
+			"(\r\n" + 
+			"select ap_no, count(AP_NO) rate_cnt,\r\n" + 
+			"round(avg(rate_handletime),0) rate_handletime,\r\n" + 
+			"round(avg(rate_clean),0) rate_clean,\r\n" + 
+			"round(avg(rate_service),0) rate_service,\r\n" + 
+			"round(avg(rate_price),0) rate_price,\r\n" + 
+			"round(avg(rate_location),0) rate_location,\r\n" + 
+			"round(avg(TTL),1) avg_rating\r\n" + 
+			"from\r\n" + 
+			"(\r\n" + 
+			"select a.*,\r\n" + 
+			"sum(rate_handletime + rate_clean + rate_service + rate_price + rate_location)/5 TTL\r\n" + 
+			" from rating a\r\n" + 
+			" group by rate_no\r\n" + 
+			" ) a\r\n" + 
+			" group by ap_no\r\n" + 
+			") rate\r\n" + 
+			"where a.ap_no = rate.ap_no and a.ap_no = ?;";
 
 	@Override
 	public void insert(RateVO rateVO) {
@@ -144,6 +167,60 @@ public class RateDAO implements RateDAO_interface {
 		}
 		return rateVO;
 
+	}
+	@Override
+	public RateVO findRatingByPrimaryKey(Integer ap_no) {
+		RateVO rateVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_AVG_STMT);
+			pstmt.setInt(1, ap_no);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				rateVO = new RateVO();
+				rateVO.setRate_handletime(rs.getString("rate_handletime"));
+				rateVO.setRate_clean(rs.getString("rate_clean"));
+				rateVO.setRate_service(rs.getString("rate_service"));
+				rateVO.setRate_price(rs.getString("rate_price"));
+				rateVO.setRate_location(rs.getString("rate_location"));
+				rateVO.setAvg_rating(rs.getFloat("avg_rating"));
+			}
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return rateVO;
+		
 	}
 
 	@Override

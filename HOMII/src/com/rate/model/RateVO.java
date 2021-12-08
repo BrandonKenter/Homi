@@ -13,6 +13,7 @@ public class RateVO implements java.io.Serializable {
 	private String rate_price;
 	private String rate_location;
 	private String comment;
+	private Float avg_rating;
 
 	public Integer getRate_no() {
 		return rate_no;
@@ -85,5 +86,11 @@ public class RateVO implements java.io.Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public Float getAvg_rating() {
+		return avg_rating;
+	}
 
+	public void setAvg_rating(Float avg_rating) {
+		this.avg_rating = avg_rating;
+	}
 }

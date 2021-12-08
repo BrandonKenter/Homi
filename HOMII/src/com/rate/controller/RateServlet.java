@@ -13,12 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import com.comp.model.CompService;
-import com.comp.model.CompVO;
-import com.mem.model.MemService;
-import com.mem.model.MemVO;
+import com.apt.model.AptService;
+import com.apt.model.AptVO;
 import com.rate.model.RateService;
 import com.rate.model.RateVO;
 
@@ -42,8 +39,7 @@ public class RateServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html; charset=ISO-8859-1");
-		InputStream in = null;
+		res.setContentType("text/html; charset=UTF-8");
 
 		if ("insert".equals(action)) { // request from addEmp.jsp
 			List<String> errorMsgs = new LinkedList<String>();
@@ -63,13 +59,13 @@ public class RateServlet extends HttpServlet {
 
 				Integer member_no;
 
-				String memNo = req.getParameter("memNo");// ****get parameter±q­þÃä¨Ó
+				String memNo = req.getParameter("memNo");// ****get parameter
 				member_no = new Integer(memNo.trim());
 
 				Integer ap_no;
 
 				String apNo = req.getParameter("ap_no");
-				ap_no = new Integer(memNo.trim());
+				ap_no = new Integer(apNo.trim());
 
 
 				String rate_handletime = req.getParameter("rate_handletime");
@@ -137,8 +133,12 @@ public class RateServlet extends HttpServlet {
 
 				rateVO = rateSvc.addRate( member_no, ap_no, rate_handletime, rate_clean, rate_service,
 						rate_price, rate_location, comment);
+				
+				AptService aptSvc = new AptService();
+				AptVO aptVO = aptSvc.getOneApt(ap_no);
 
-				String url = "/front-end/index.jsp"; // Need to change the post page to my property
+				req.setAttribute("aptVO", aptVO); 
+				String url = "/front-end/apt/listOneApt.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 
 				successView.forward(req, res);
