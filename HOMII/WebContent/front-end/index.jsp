@@ -258,7 +258,7 @@ p {
     		<div class="col-md-12">
     			<h1 class="text-white titlefont">Welcome to HöMI</h1>
     			<p class="text-white parafont">A good place to find your perfect apartment</p>
-    			<div class="searchdiv" style="display:none;">
+    			<div class="searchdiv">
     				<form method="post" action="<%=request.getContextPath()%>/apt/apt.do">
 	    				<div class="input-group">
 	    				  <div class="form-outline">

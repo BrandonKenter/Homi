@@ -221,7 +221,7 @@ table#forum.table>tbody>tr>td>a.JQellipsis
 			<tr>
 
 				<td style=" font-size:large;">
-					<a class="notJQellipsis" href="<%=request.getContextPath()%>/front-end/apt/displayOneAptForLand.jsp?ap_no=${aptVO.ap_no}">${aptVO.ap_name}</a>			
+					<a class="notJQellipsis" href="<%=request.getContextPath()%>/apt/apt.do?action=getOne_For_Display&ap_no=${aptVO.ap_no}">${aptVO.ap_name}</a>			
 				</td>		
 				<td>${aptVO.ap_address}</td>		
 				<td>${aptVO.rating}</td>		
