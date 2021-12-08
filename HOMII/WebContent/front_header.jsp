@@ -62,10 +62,10 @@ nav{
                     <li class="nav-item">
 	                    <c:choose>
 	                         <c:when test="${memVO==null || memVO.member_no==99 }">
-	                               <li><a class="nav-link active" aria-current="page" href="#" onclick="loginFirst()">Member Center</a></li>
+	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">Member Center</a></li>
 	                         </c:when>
 	                         <c:otherwise>
-	                         	<li><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/front-end/mem/memberInfo.jsp">Member Center</a></li>
+	                         	<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/mem/memberInfo.jsp">Member Center</a></li>
 	                         </c:otherwise>
 	                    </c:choose>    	
                     </li>

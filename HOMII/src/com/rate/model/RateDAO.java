@@ -250,6 +250,12 @@ public class RateDAO implements RateDAO_interface {
 				rateVO.setRate_price(rs.getString("rate_price"));
 				rateVO.setRate_location(rs.getString("rate_location"));
 				rateVO.setComment(rs.getString("comment"));
+				float avg = (Integer.valueOf(rateVO.getRate_clean()) 
+						   + Integer.valueOf(rateVO.getRate_handletime()) 
+						   + Integer.valueOf(rateVO.getRate_location())
+						   + Integer.valueOf(rateVO.getRate_price())
+						   + Integer.valueOf(rateVO.getRate_service()))/5.0f;
+				rateVO.setAvg_rating(avg);
 				
 				list.add(rateVO); // Store the row in the list
 			}

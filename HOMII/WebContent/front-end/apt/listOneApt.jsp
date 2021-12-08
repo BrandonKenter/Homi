@@ -8,7 +8,8 @@
 <%@ page import="com.reg.model.*" %>
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="compSvc" scope="page" class="com.comp.model.CompService" />
-<jsp:useBean id="RegSvc" scope="page" class="com.reg.model.RegService" />
+<jsp:useBean id="rateSvc" scope="page" class="com.rate.model.RateService" />
+<jsp:useBean id="regSvc" scope="page" class="com.reg.model.RegService" />
 <% 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	if(memVO == null){
@@ -18,14 +19,25 @@
 	AptVO aptVO = (AptVO) request.getAttribute("aptVO");
 	pageContext.setAttribute("aptVO", aptVO);
 	
-	RateService rateSvc = new RateService();
-	RateVO rateVO = rateSvc.getOneAvgRate(aptVO.getAp_no());
+	RateService rateSvc1 = new RateService();
+	RateVO rateVO = rateSvc1.getOneAvgRate(aptVO.getAp_no());
+	if(rateVO == null){
+		rateVO = new RateVO();
+		rateVO.setRate_clean("0");
+		rateVO.setRate_handletime("0");
+		rateVO.setRate_location("0");
+		rateVO.setRate_price("0");
+		rateVO.setRate_service("0");
+	}
 	pageContext.setAttribute("rateVO", rateVO);
 	
-	RegService regSvc = new RegService();
-	RegVO regVO = regSvc.getOneRegister(memVO.getMember_no());
+	RegService regSvc1 = new RegService();
+	RegVO regVO = regSvc1.getOneRegister(memVO.getMember_no());
+	pageContext.setAttribute("regVO", regVO);
 	if(regVO == null || !regVO.getAp_name().equals(aptVO.getAp_name())){
-		regVO = null;
+		regVO = new RegVO();
+		regVO.setAp_name("none");
+		pageContext.setAttribute("regVO", regVO);
 	}
 	
 %>
@@ -233,16 +245,35 @@ textarea.form-control {
 	background-color: #5c4f4f;
     border-radius: 0px 0px 30px 30px;
 }
-.subScoreBox{
-}
-.subRating{
-}
 button{
 	width: 75%;
     height: 50px;
     border-radius: 10px !important;
     background-color: #427b01;
     color: white;
+}
+.commentScore{
+	font-size:50px;
+}
+.commentScoreFooter{
+	position: absolute;
+    bottom: -10px;
+    font-size: 20px;
+}
+.commentBox{
+	border-radius:30px;
+  	backdrop-filter: blur(5px);
+  	background-color:#80808021;
+  	height:168px;
+	margin-top: 30px !important;
+	margin-right: 12px !important;
+	width:49% !important;
+	  	border:2px solid black;
+}
+.comment{
+	border-left:2px solid black;
+	margin-bottom: -20px;
+	display:flex;
 }
 </style>
 </head>
@@ -356,11 +387,29 @@ button{
 			<div class="scoreBox">
 				<div class="review">
 					<p style="margin:25px;">Share details of your own <br> experience with this property</p>
-					<a href="<%=request.getContextPath()%>/front-end/rate/addRate.jsp?ap_name=${aptVO.ap_name}" class="checkRegBtn"><button>Write a Review</button></a>
-					<input type="text" class="form-control checkReg" value="<%= (regVO==null)? "-1" : "1"%>" style="display:none;">
+					<c:choose>
+						<c:when test="${regVO.ap_name == aptVO.ap_name}">
+							<a href="<%=request.getContextPath()%>/front-end/rate/addRate.jsp?ap_name=${aptVO.ap_name}"><button>Write a Review</button></a>
+						</c:when>
+						<c:otherwise>
+							<a href="" ><button class="checkRegBtn">Write a Review</button></a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<c:forEach var="rateVO1" items="${rateSvc.getAllRateByApt(aptVO.ap_no)}">
+			<div class="commentBox col-md-6">
+				<div class="row">
+					<div class="col-md-4" style="display:flex;line-height: 145px;"><div class="commentScore">${rateVO1.avg_rating}/</div><div style="position: relative;"><span class="commentScoreFooter">5</span></div></div>
+					<div class="comment col-md-8">
+						<div style="margin:auto;">${rateVO1.comment}</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 	<div class="row">
 	<div style="text-align:center;"><h1 class="shadow p-3 mb-1 rounded" style="display:inline-block;">All the cases</h1></div>
@@ -411,6 +460,7 @@ button{
 <script>
 window.onload = function(){
 	let handletime = ${rateVO.rate_handletime};
+	console.log(handletime);
 	let s1_h = document.getElementById('s1_handletime');
 	let s2_h = document.getElementById('s2_handletime');
 	let s3_h = document.getElementById('s3_handletime');
@@ -462,9 +512,6 @@ window.onload = function(){
 	}
 }
 $(".checkRegBtn").click(function(e){
-	let checkReg = $(".checkReg").val();
-	console.log(checkReg)
-	if (checkReg == -1){
         Swal.fire({
             position: "center",
             icon: "error",
@@ -473,7 +520,7 @@ $(".checkRegBtn").click(function(e){
             timer: 1500,
         });
     	e.preventDefault();
-	}
+	
 
 })
 </script>
