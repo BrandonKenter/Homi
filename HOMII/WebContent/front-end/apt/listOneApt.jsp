@@ -412,7 +412,7 @@ button{
 		</c:forEach>
 	</div>
 	<div class="row">
-	<div style="text-align:center;"><h1 class="shadow p-3 mb-1 rounded" style="display:inline-block;">All the cases</h1></div>
+	<div style="text-align:center; margin-top:20px;"><h1 class="shadow p-3 mb-1 rounded" style="display:inline-block;">Complaint cases</h1></div>
 		<table id="forum" class="table table-hover">
 			 <thead style="background-color:#126E7D">
 				<tr>		
