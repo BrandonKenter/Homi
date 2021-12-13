@@ -243,7 +243,7 @@ $("#priority").change(function(){
 	var p = $("#priority").val();
 	console.log(parseInt(p));
 	if (isNaN(parseInt(p))){
-		Swal.fire('Please enter digit only');
+		Swal.fire('Priority range only accpet digit');
 	}
 	if (parseInt(p) > 5 || parseInt(p) < 0){
 		Swal.fire('Priority range is 0 ~ 5');
