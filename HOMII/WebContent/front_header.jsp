@@ -69,16 +69,6 @@ nav{
 	                         </c:otherwise>
 	                    </c:choose>    	
                     </li>
-		    <li class="nav-item">
-	                    <c:choose>
-	                         <c:when test="${memVO==null || memVO.member_no==99 }">
-	                               <li><a class="nav-link" aria-current="page" href="#" onclick="loginFirst()">My Archive</a></li>
-	                         </c:when>
-	                         <c:otherwise>
-	                         	<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/archive/myArchive.jsp">My Archive</a></li>
-	                         </c:otherwise>
-	                    </c:choose>    	
-                    </li>
                     <li class="nav-item">
                     	<c:choose>
 	                         <c:when test="${memVO==null || memVO.member_no==99 }">
