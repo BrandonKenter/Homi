@@ -487,7 +487,9 @@ Users can interact with the case tiles in two way:
 	- Click Develop, and Check "Allow Remote Automation"
 
 
-
+## Testing Package
+- Since we use differetnt setting to do testing, there is a the link to download the Testing Package for HOMII project. 
+https://drive.google.com/file/d/15wYgkNkxMPZycv60q63wLgn_9EAIdFdW/view?usp=sharing
 
 
 
