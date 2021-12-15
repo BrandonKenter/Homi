@@ -119,7 +119,7 @@ nav{
 	                    </c:choose>    	
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="<%=request.getContextPath()%>/front-end/help/help.jsp">Get help</a>
                     </li>
                 </ul>
                 <c:choose>
