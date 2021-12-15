@@ -102,6 +102,8 @@ nav{
 	                         		<c:when test="${memVO.membership == 0 && regVO != null}">
 	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comu/listComu.jsp">My Community</a></li>
 	                         		</c:when>
+	                         		<c:when test="${memVO.membership == 1 ">
+	                         		</c:when>
 	                         		<c:otherwise>
 	                         			<li><a class="nav-link" aria-current="page" href="javascript:void(0);" onclick="applyFirst()">My Community</a></li>
 	                         		</c:otherwise>
