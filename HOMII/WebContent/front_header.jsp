@@ -5,6 +5,7 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.apt.model.*"%>
 <%@ page import="com.comp.model.*"%>
+<%@ page import="com.reg.model.*"%>
 <%@ page import="java.util.*"%>
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <%
@@ -14,6 +15,9 @@
 		memVO.setMember_no(99);
 	}
 	pageContext.setAttribute("memVO", memVO);
+	RegService regSvc = new RegService();
+	RegVO regVO = regSvc.getOneRegister(memVO.getMember_no());
+	pageContext.setAttribute("regVO", regVO);
 %>
 <!DOCTYPE html>
 <html>
@@ -95,9 +99,12 @@ nav{
 	                         </c:when>
 	                         <c:otherwise>
 	                         	<c:choose>
-	                         		<c:when test="${memVO.membership == 0}">
+	                         		<c:when test="${memVO.membership == 0 && regVO != null}">
 	  	                       			<li><a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/front-end/comu/listComu.jsp">My Community</a></li>
 	                         		</c:when>
+	                         		<c:otherwise>
+	                         			<li><a class="nav-link" aria-current="page" href="javascript:void(0);" onclick="applyFirst()">My Community</a></li>
+	                         		</c:otherwise>
 	                         	</c:choose>
 	                         </c:otherwise>
 	                    </c:choose> 
@@ -112,7 +119,7 @@ nav{
 	                    </c:choose>    	
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/front-end/help/help.jsp">Contact Us</a>
+                        <a class="nav-link" href="#">Contact Us</a>
                     </li>
                 </ul>
                 <c:choose>
@@ -147,12 +154,19 @@ nav{
     </nav>
 
 <script>
+
 function loginFirst(){
 	Swal.fire('Please Login').then((result)=>{
 		window.location.href = "<%=request.getContextPath()%>/front-end/mem/MemLogin.jsp";
 	});
 }
+function applyFirst(e){
+	Swal.fire('Please apply for an apartment first').then((result)=>{
+		window.location.href = "<%=request.getContextPath()%>/front-end/comp/listAllCompForTenant.jsp";
+		e.preventDefault();
+	});
 
+}
 </script>
 </body>
 </html>

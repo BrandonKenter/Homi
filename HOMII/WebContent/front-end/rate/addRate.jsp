@@ -47,7 +47,7 @@ body {
   width: 100vw;
   height: 47vw;
 
-  background-image: url("<%=request.getContextPath()%>/img/Rate background.jpg");
+  background-image: url("<%=request.getContextPath()%>/img/complaint form.jpg");
   background-size:100%;
   	background-attachment:fixed;
 }
